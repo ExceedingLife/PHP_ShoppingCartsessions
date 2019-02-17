@@ -9,12 +9,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navCart">
                 <ul class="navbar-nav mx-auto"><!-- TEST MX-AUTOO-->
-
-                    <!-- active nav / nav-item active -->
-                    <!-- TO-DO: php page checks for active and cart.count -->
-
-                    <li class="nav-item px-lg-4">
-                        <a class="nav-link text-uppercase" href="#">Home</a>
+                    <li class="nav-item px-lg-4 <?php echo $page_title=='index-test' ? 'active' : ''; ?>">
+                        <a class="nav-link text-uppercase" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item px-lg-4 <?php echo $page_title=='Products'? 'active' : ''; ?>">
                         <a class="nav-link text-uppercase" href="products.php">Products</a>
@@ -25,10 +21,8 @@
                             Cart<span class="badge badge-light">
                             <?php echo $cart_count; ?></span>
                         </a>
-
                     </li>
                 </ul>
             </div>
-
         </div>
     </nav>

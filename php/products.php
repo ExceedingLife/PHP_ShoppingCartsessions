@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
   // Start a new SESSION
-   // session_start();
+    session_start();
 
   // connect database object
     include "../objects/database.php";
@@ -23,7 +23,7 @@ ini_set('display_errors', 1);
   // pagination (if no page is set) default : 1
     $page = isset($_GET["page"]) ? $_GET["page"] : 1;
   // Records Per Page
-    $recordsPerPage = 2;
+    $recordsPerPage = 3;
     $fromRecordNum = ($recordsPerPage * $page) - $recordsPerPage;
 
   // set page title

@@ -26,7 +26,7 @@
         $('.update-quantity-form').on('submit', function() {
             // get basic information for updating the cart
             var id = $(this).find('.product-id').text();
-            var quantity = $(this).find(.'cart-quantity').val();
+            var quantity = $(this).find('.cart-quantity').val();
             // redirect to update_quantity.php 
             window.location.href = "update_quantity.php?id=" + id + "&quantity=" + quantity;
             return false;

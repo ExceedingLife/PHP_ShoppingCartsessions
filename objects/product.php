@@ -25,7 +25,7 @@
             // sql SELECT *
             $query = "SELECT pid, pname, pdesc, pprice " .
                      "FROM " . $this->table_name .
-                     //"ORDER BY pcreated DESC " .
+                     ///"ORDER BY pcreated DESC " .
                      " LIMIT ?, ?";
             // prepare query statement
             $stmt = $this->pdoConn->prepare($query);
@@ -56,8 +56,8 @@
         public function readByIds($ids) {
             $ids_arr = str_repeat('?,', count($ids)-1) . '?';
             // query to select producsts
-            $query = "SELECT pid, pname, pprice" .
-                     "FROM " . $this->table_name . 
+            $query = "SELECT pid, pname, pprice, pdesc " .
+                     "FROM " . $this->table_name . " " .
                      "WHERE pid IN ({$ids_arr}) " .
                      "ORDER BY pname";
             // prepare query statement

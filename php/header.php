@@ -39,9 +39,3 @@ $_SESSION['cart']=isset($_SESSION['cart']) ? $_SESSION['cart'] : array();
                              $page_title : "PHP Shopping Cart - SESSION"; ?></h2>
                     </div>
                 </div>
-
-            <!--    
-            </div>
-        </div>
-    </section>
-             -->

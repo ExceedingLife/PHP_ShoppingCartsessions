@@ -8,6 +8,7 @@ session_start();
     include_once "objects/product.php";
     include_once "objects/product_images.php";
 // object instances
+$_SESSION['cart']=isset($_SESSION['cart']) ? $_SESSION['cart'] : array();
 $database = new Database();
 $db = $database->getConnection();
 $product = new Product($db);
@@ -44,15 +45,42 @@ $page_title = "index-test";
             </div>
         </div>
     </header>
-    <?php include "php/navigation.php"; ?>
+    <!-- Navigation Bar py-lg-4 -->
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Harkins Shopping Cart</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navCart"
+                aria-controls="navCart" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navCart">
+                <ul class="navbar-nav mx-auto"><!-- TEST MX-AUTOO-->
+                    <li class="nav-item px-lg-4 <?php echo $page_title=='index-test' ? 'active' : ''; ?>">
+                        <a class="nav-link text-uppercase" href="#">Home</a>
+                    </li>
+                    <li class="nav-item px-lg-4 <?php echo $page_title=='Products'? 'active' : ''; ?>">
+                        <a class="nav-link text-uppercase" href="php/products.php">Products</a>
+                    </li>
+                    <li class="nav-item px-lg-4 <?php echo $page_title=='Cart'? 'active' : ''; ?>">
+                        <a class="nav-link text-uppercase" href="php/cart.php">
+                        <?php $cart_count = count($_SESSION['cart']); ?>
+                            Cart<span class="badge badge-light">
+                            <?php echo $cart_count; ?></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <!-- Included Section Content by Page Below -->
     <section id="section-content" class="text-center">
         <div id="contentdiv" class="container rounded contentdiv">
             <div class="row">
                 <div class="col-md-12">
                     <div class="pb-2 mt-4 mb-2 border-bottom clearfix">
-                        <h2><?php echo isset($page_title) ? "PHP Shopping Cart - " .
-                             $page_title : "PHP Shopping Cart - SESSION"; ?></h2>
+                        <h2><?php echo isset($page_title) ? "PHP <b>TEST</b> Cart - " .
+                             $page_title : "PHP Shopping Cart - TEST PAGE"; ?></h2>
                     </div>
                 </div>
                 <!-- Page CONTENT is here. -->
@@ -78,19 +106,24 @@ if($num > 0){
     if(!isset($_SESSION["cart"])) {
         $_SESSION["cart"] = array();
     }
+
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
+        // create box
         echo '<div class="col-md-4 mb-2">';
-            echo '<div class="product-id d-none">{$id}</div>';
-            echo '<a href="product.php?id={$id}" class="product-link">';
-                $product_image->product_id = $pid;
-                $stmt_product_image = $product_image->readFirst();
+            // product id for javascript
+            echo "<div class='product-id d-none'>{$pid}</div>";
+                echo "<a href='product.php?id={$pid}' class='product-link'>";
+                // select and show product image
+                $product_image->product_id=$pid;
+                $stmt_product_image=$product_image->readFirst();
                 while($row_product_image = $stmt_product_image->fetch(PDO::FETCH_ASSOC)) {
                     echo '<div class="mb-1">';
-                        echo '<img src="img/{$row_product_image[name]}" class="w-100" />';
+                        echo '<img src="img/'.$row_product_image['name'].'" class="w-100" />';
                     echo '</div>';
                 }
-                echo '<div class="product-name mb-1">{$name}</div>';
+                // product name
+                echo "<div class='product-name mb-1'>{$pdesc}</div>";
             echo '</a>';
           // ADD TO CART BTN
             echo '<div class="mb-1">';
@@ -99,11 +132,10 @@ if($num > 0){
                     echo 'UPDATE CART';
                 echo '</a>';
             } else {
-                echo '<a href="add_to_cart.php?id={$id}&page={$page}" 
-                       class="btn btn-primary w-100">Add to cart</a>';
+                echo "<a href='add_to_cart.php?id={$pid}&page={$page}' 
+                       class='btn btn-primary w-100'>Add to Cart</a>";
             }
             echo '</div>';
-
         echo '</div>';
     }
 } else {
@@ -112,7 +144,10 @@ if($num > 0){
     echo '</div>';
 }
 ?>
-                
+
+
+
+
 
 
 
