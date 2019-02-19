@@ -36,5 +36,24 @@
             // return values
             return $stmt;
         }
+
+        // read product image for specific product
+        function readByProductId() {
+            // query
+            $query = "SELECT id, pid, name " .
+                     "FROM " . $this->table_name . " " .
+                     "WHERE pid = ? " .
+                     "ORDER BY name DESC";
+            // prepare query statement
+            $stmt = $this->pdoConn->prepare($query);
+            // sanitize
+            $this->product_id=htmlspecialchars(strip_tags($this->product_id));
+            // bind id variable
+            $stmt->bindParam(1, $this->product_id);
+            // execute query
+            $stmt->execute();
+            // return values
+            return $stmt;
+        }
     }
 ?>

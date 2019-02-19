@@ -11,9 +11,12 @@ include_once "header.php";
 echo "<div class='col-md-12'>";
     // tell user the order was placed
     echo "<div class='alert alert-success'>";
-        echo "<strong>Your order has been SUCCESSFUL!</strong>
-         \nThank you for shopping with us.";
+        echo "<strong>Your order has been SUCCESSFUL!</strong>" .
+             "<br> Thank you for shopping with us.";
     echo "</div>";
+    echo "<a href='products.php' class='btn btn-success mb-1'>";
+        echo "<span class='glyphicon glyphicon-ok'></span> Return Home";
+    echo "</a>";
 echo "</div>";
 
 // FOOTER section

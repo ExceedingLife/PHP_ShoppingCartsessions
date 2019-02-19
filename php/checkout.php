@@ -2,7 +2,8 @@
 session_start();
 // connect database / Objects
 include "../objects/database.php";
-include_once " ../objects/product.php";
+ //include_once " ../objects/product.php";
+include_once "../objects/product.php";
 include_once "../objects/product_images.php";
 // get db connection
 $database = new Database();
@@ -23,26 +24,26 @@ if(count($_SESSION["cart"]) > 0) {
     }
 
     $stmt = $product->readByIds($ids);
-
     $total = 0;
     $item_count = 0;
 
     while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
-        $quantity = $_SESSION["cart"][$id]["quantity"];
-        $sub_total = $price * $quantity;
+        $quantity = $_SESSION["cart"][$pid]["quantity"];
+        $sub_total = $pprice * $quantity;
 
-        echo "<div class='cart-row'>";
-            echo "<div class='col-md-8'>";
-                echo "<div class='product-name mb-1'><h4>{$name}</h4></div>";
-                echo $quantity > 1 ? "<div>{$quantity} items</div>"
-                    : "<div>{$quantity} item</div>";
-            echo "</div>";
-            echo "<div class='col-md-4'>";
-                echo "<h4>&#36;". number_format($price, 2, '.', ',') ."</h4>";
+        echo "<div class='container'>";
+            echo "<div class='row cart-row'>";
+                echo "<div class='col-md-9 text-justify'>";
+                    echo "<div class='product-name mb-1'><h4>{$pdesc}</h4></div>";
+                    echo $quantity > 1 ? "<div>{$quantity} items</div>"
+                        : "<div>{$quantity} item</div>";
+                echo "</div>";
+                echo "<div class='col-md-3'>";
+                    echo "<h4>&#36;". number_format($pprice, 2, '.', ',') ."</h4>";
+                echo "</div>";
             echo "</div>";
         echo "</div>";
-
         $item_count += $quantity;
         $total += $sub_total;
     }
@@ -60,6 +61,7 @@ if(count($_SESSION["cart"]) > 0) {
             echo "</a>";
         echo "</div>";
     echo "</div>";
+    
 } else {
     echo "<div class='col-md-12'>";
         echo "<div class='alert alert-danger'>";

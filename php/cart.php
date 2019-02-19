@@ -50,7 +50,7 @@
 
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             extract($row);
-            $quantity = $_SESSION["cart"][$id]["quantity"];
+            $quantity = $_SESSION["cart"][$pid]["quantity"];
             $sub_total = $pprice * $quantity;
 
             echo '<div class="container">';
@@ -76,8 +76,12 @@
                         echo '</form>';
                     echo '</div>';
 
-                    echo '<div class="col-md-4">';
-                        echo '<h4>&#36;' . number_format($pprice, 2, '.', ',') . '</h4>';
+                    // Quantity & Total columns
+                    echo "<div class='col-md-2'>";
+                        echo "<p class='d-inline'>x </p>" ."&nbsp;". $quantity;
+                    echo "</div>";
+                    echo '<div class="col-md-2">';                        
+                        echo '<h4>&#36;' . number_format($pprice, 2, '.', ',') . '</h4>';//echo "<p>$quantity</p>";
                     echo '</div>';
                 echo '</div>';
             echo '</div>';
@@ -103,6 +107,9 @@ else {
         echo '<div class="alert alert-danger">';
             echo 'No products found in your cart!';
         echo '</div>';
+        echo "<a href='products.php' class='btn btn-danger mb-1'>";
+            echo "<span class='glyphicon glyphicon-remove'></span> Go Back";
+        echo "</a>";
     echo '</div>';
 }
   // include page footer

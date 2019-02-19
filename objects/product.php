@@ -67,5 +67,28 @@
             // return values from database
             return $stmt;
         }
+
+        // for reading product for UPDATE
+        function readOne(){
+            // query
+            $query = "SELECT pname, pprice, pdesc " .
+                     "FROM " . $this->table_name . " " .
+                     "WHERE pid = ? " .
+                     "LIMIT 0, 1";
+            // prepare query statement
+            $stmt = $this->pdoConn->prepare($query);
+            // sanitize
+            $this->id=htmlspecialchars(strip_tags($this->id));
+            // bind prod id value
+            $stmt->bindParam(1, $this->id);
+            // execute query
+            $stmt->execute();
+            // get row values
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            // assign retrieved values to object
+            $this->name = $row['pname'];
+            $this->description = $row['pdesc'];
+            $this->price = $row['pprice'];
+        }
     }
 ?>

@@ -56,7 +56,7 @@ $page_title = "index-test";
             <div class="collapse navbar-collapse" id="navCart">
                 <ul class="navbar-nav mx-auto"><!-- TEST MX-AUTOO-->
                     <li class="nav-item px-lg-4 <?php echo $page_title=='index-test' ? 'active' : ''; ?>">
-                        <a class="nav-link text-uppercase" href="#">Home</a>
+                        <a class="nav-link text-uppercase" href="#">Test</a>
                     </li>
                     <li class="nav-item px-lg-4 <?php echo $page_title=='Products'? 'active' : ''; ?>">
                         <a class="nav-link text-uppercase" href="php/products.php">Products</a>

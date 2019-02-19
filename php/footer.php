@@ -13,10 +13,12 @@
 <!-- Custom JavaScript Script -->
 <script type="text/javascript">
     $(document).ready(function() {
+        $('.product-img').hide();
+
         // add button listener
         $('.add-to-cart-form').on("submit", function() {
             // information in table / single product layout
-            var id = $(this).find("product-id").text();
+            var id = $(this).find(".product-id").text();
             var quantity = $(this).find(".cart-quantity").val();
             // redirect to add_to_cart.php, with parameter values
             window.location.href = "add_to_cart.php?id=" + id + "&quantity=" + quantity;
@@ -30,6 +32,13 @@
             // redirect to update_quantity.php 
             window.location.href = "update_quantity.php?id=" + id + "&quantity=" + quantity;
             return false;
+        });
+        // change product img on hoverenter
+        //$(document).on('mouseover', '.product-img-thumbnail', function() {
+        $('.product-img-thumbnail').mouseover(function() {
+            var data_img_id = $(this).attr('data-img-id');
+            $('.product-img').hide();
+            $('#product-img-' + data_img_id).show();
         });
     });
 </script>
